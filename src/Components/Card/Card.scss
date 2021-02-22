@@ -1,0 +1,17 @@
+.individual-card{
+    display: flex;
+   flex-wrap: wrap;
+   justify-content: space-around;
+   margin-top: 5%;
+   margin-left: 7.5%;
+   margin-right: 7.5%;
+   margin-bottom: 5%;
+}
+.individual-card > div {
+    
+    flex:1 1 auto;
+    border:5px rgb(0, 0, 0) solid;
+    text-align:center;
+    margin:15px;  /* and that, will result in a 10px gap */
+
+}

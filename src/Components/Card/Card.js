@@ -17,10 +17,15 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import PublicIcon from '@material-ui/icons/Public';
 import AspectRatioRoundedIcon from '@material-ui/icons/AspectRatioRounded';
 import Button from '@material-ui/core/Button';
+import './Card.scss'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 300,
+    background: '#FE6B8B',
+    padding: 10,
+    minWidth: 250,
+    maxWidth: 250,
+    minHeight: 300,
   },
   media: {
     height: 1,
@@ -32,71 +37,78 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Zoom direction="up" ref={ref} {...props} />;
   });
 
-export default function ProjectCard() {
+export default function ProjectCard(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const [openId, setOpenId] = React.useState(null);
+
+  const handleClickOpen = id => {
+    setOpenId(id);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenId(null);
   };
 
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        title="YouLoop"/>
-        <CardMedia
-            className={classes.media}
-            image="/static/images/cards/paella.jpg"
-            title="Paella dish"
-        />
-        <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-            Custom made video player to loop Youtube videos.
-            </Typography>
-        </CardContent>
-        <CardActions>
-            <IconButton>
-                <GitHubIcon />
-            </IconButton>
-            <IconButton>
-                <PublicIcon />
-            </IconButton>
-            <Button
-            onClick={handleClickOpen}
-            >
-                <AspectRatioRoundedIcon />
-            </Button>
-        </CardActions>
-      
-      <Dialog
-        open={open}
-        TransitionComponent={Transition}
-        keepMounted
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-slide-title"
-        aria-describedby="alert-dialog-slide-description"
-      >
-        <DialogTitle id="alert-dialog-slide-title">{"YouLoop"}</DialogTitle>
-        <DialogContent>
-            <CardMedia 
-            className={classes.media}
-            image="url(https://i.imgur.com/HeGEEbu.jpg)"
-            title="Paella dish" />
-            <DialogContentText id="alert-dialog-slide-description">
-                Let Google help apps determine location. This means sending anonymous location data to
-                Google, even when no apps are running.
-            </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </Card>
+    <div className='individual-card'>
+      {props.projectList.map( proj => {
+        return(
+            <Card className={classes.root} >
+            <CardHeader
+            title={proj.name}/>
+            <CardMedia
+                className={classes.media}
+                image={proj.picture}
+            />
+            <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">
+                {proj.type}
+                </Typography>
+            </CardContent>
+            <CardActions>
+                <IconButton>
+                    <GitHubIcon />
+                </IconButton>
+                <IconButton>
+                    <PublicIcon href={proj.live}/>
+                </IconButton>
+                <Button
+                onClick={() => handleClickOpen(proj.id)} >
+                    <AspectRatioRoundedIcon />
+                </Button>
+            </CardActions>
+          
+          <Dialog
+            open={openId === proj.id}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-slide-title"
+            aria-describedby="alert-dialog-slide-description"
+            key={proj.id}
+            // useStyles='background: '#FE6B8B'
+          >
+            <DialogTitle key={proj.id} >{proj.name}</DialogTitle>
+            <DialogContent>
+                <CardMedia 
+                className={classes.media}
+                image={proj.picture}
+                title="Paella dish" />
+                <DialogContentText id="alert-dialog-slide-description">
+                    {proj.description}
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Close
+              </Button>
+            </DialogActions>
+          </Dialog>
+
+        </Card>
+          )
+        })}
+    </div>
   );
 }
