@@ -3,8 +3,8 @@
    flex-wrap: wrap;
    justify-content: space-around;
    margin-top: 5%;
-   margin-left: 7.5%;
-   margin-right: 7.5%;
+   margin-left: 10%;
+   margin-right: 10%;
    margin-bottom: 5%;
 }
 .individual-card > div {
@@ -13,5 +13,7 @@
     border:5px rgb(0, 0, 0) solid;
     text-align:center;
     margin:15px;  /* and that, will result in a 10px gap */
+    box-shadow: 0 30px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    border-radius: 20px;
 
 }

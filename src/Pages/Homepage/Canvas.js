@@ -13,8 +13,8 @@ class Canvas extends Component {
       this.mouseDist = 80;
       this.damping = 0.15;
       this.showIndicators = false;
-      this.leftColor = '#a8d0e6';
-      this.rightColor = '#f76c6c';
+      this.leftColor = '#6969';
+      this.rightColor = '#0001';
     }
     var vars = new guiVars();
 

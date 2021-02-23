@@ -21,7 +21,10 @@ import './Card.scss'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: '#FE6B8B',
+    background: "#f010",
+    '&:hover': {
+       background: "#f76c6c",
+       transform: "scale3d(1.05, 1.05, 1.4)"},
     padding: 10,
     minWidth: 250,
     maxWidth: 250,
@@ -87,7 +90,6 @@ export default function ProjectCard(props) {
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description"
             key={proj.id}
-            // useStyles='background: '#FE6B8B'
           >
             <DialogTitle key={proj.id} >{proj.name}</DialogTitle>
             <DialogContent>
